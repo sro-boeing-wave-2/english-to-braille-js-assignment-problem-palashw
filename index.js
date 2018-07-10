@@ -10,13 +10,12 @@ import englishToBrailleLiteralSet from './english-to-braille.js';
 function convert() {
   const inputstr = document.getElementById('sourceLangText').value;
   const splitstr = inputstr.split('');
-  let braillestr = [];
+  let braillestr = '';
+  const mymap = new Map(englishToBrailleLiteralSet);
+  let key;
   for (let i = 0; i < splitstr.length; i += 1) {
-    for (let j = 0; j < englishToBrailleLiteralSet.length; j += 1) {
-      if (splitstr[i] === englishToBrailleLiteralSet[j][0]) {
-        braillestr += englishToBrailleLiteralSet[j][1];
-      }
-    }
+    key = splitstr[i];
+    braillestr += mymap.get(key);
   }
   document.getElementById('targetLangText').innerHTML = braillestr;
 }
